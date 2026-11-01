@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 · what the reports show'
 owner: Juan Andres Lopez
-status: open
+status: closed
 reviewed: 2026-11-01
 signature: Juan Andres Lopez
 ---
@@ -14,10 +14,10 @@ signature: Juan Andres Lopez
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 </script>
 
-[#4471](/kb/incidents/4471) is marked known: one issue, one fix queued. Its reports show <ProblemCount ticket={4471} /> problems. The queued parser fix closes only one of them.
+[#4471](/kb/incidents/4471) was marked known: one issue, one fix. Its reports show <ProblemCount ticket={4471} /> problems, and each one ended differently. Engineering closed #4471 on 5 October.
 
 <Callout kind="warn">
-Not one issue. Each problem below needs its own fix and its own ticket.
+Not one issue. The parser fix closed one problem. The form hint was never fixed: its form was retired.
 </Callout>
 
 ## The problems
@@ -26,29 +26,27 @@ Not one issue. Each problem below needs its own fix and its own ticket.
 
 ## How the reports split
 
-1. **Parser** (<ProblemCount ticket={4471} problem="parser" /> reports). The shared parser reads every
-   date month first. Our tenants write the day first, so day and month swap: "booked for 7 April,
-   the invite says 4 July". This is the problem #4471 describes.
-2. **Form hint** (<ProblemCount ticket={4471} problem="hint" /> reports). The booking-v3 form prints
-   `MM/DD/YYYY` under its date field. People at day-first tenants type what the hint says, and the
-   form reads the date the tenant's way. The result looks the same as the parser bug, but only
-   reports sent through the form at booking-v3 tenants have it. The parser fix leaves it open.
-3. **One-day move** (<ProblemCount ticket={4471} problem="shift" /> reports). The date moves by one
-   day, not by a day/month swap: "invite says Tuesday 12 May, calendar says Monday 11 May", "client
-   in Lisbon got Tuesday, client in Toronto got Monday". The desk read these as a one-day move
-   (desk notes) but counted them under the parser. A swap fix cannot close them; this points to
-   time zones.
+1. **Parser** (<ProblemCount ticket={4471} cause="parser" /> reports). The shared parser read every
+   date month first. Our tenants write the day first, so day and month swapped: "booked for 7 April,
+   the invite says 4 July". This is the problem #4471 described. Fixed by
+   `fix(dates): parse dd/mm for eu locales`.
+2. **Form hint** (<ProblemCount ticket={4471} cause="hint" /> reports). The booking-v3 form printed
+   `MM/DD/YYYY` under its date field. People at day-first tenants typed what the hint said, and the
+   form read the date the tenant's way. It looks the same as the parser bug, but only reports sent
+   through the form at booking-v3 tenants have it, and the parser fix does not close it. Won't fix:
+   booking-v3 is retired.
+
+<ProblemCount ticket={4471} oneDayMove /> parser reports read as a one-day move: "invite says Tuesday 12 May, calendar says Monday 11 May", "client in Lisbon got Tuesday, client in Toronto got Monday". The desk counts them under the parser, by tenant. A day/month fix does not explain a one-day move, so if they keep coming after 5 October, reopen #3.
 
 ## Why they were merged
 
-The desk merges on subject alone ([decision 0001](/kb/decisions/0001-dedupe-by-subject)). These
+The desk merges on subject alone ([decision 0001](/kb/decisions/0001-dedupe-by-subject)). Both
 problems share subjects such as "Date is wrong", so the rule put them in one ticket. Intake tags do
 not help either: intake guesses from the browser, and the cause depends on the tenant and the form.
 
-## What changes
+## Lessons
 
-- #4471 keeps the parser problem only.
-- The form hint and the one-day move each get their own ticket, linked in the table above.
+- Count by cause, not by subject. The desk's own table showed two causes the day the ticket was marked known.
 - Matching on subject merges different problems. A new decision record should replace 0001.
 
 <RenderStamp {signature} />

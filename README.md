@@ -39,4 +39,4 @@ Exported 2026-10-04 from the `support` repo, `apps/kb/` → `src/`.
 
 - Page source: [`src/routes/kb/incidents/4471/problems/+page.svx`](src/routes/kb/incidents/4471/problems/+page.svx)
 - Page as the desk sees it: [`rendered/kb/incidents/4471/problems.html`](rendered/kb/incidents/4471/problems.html) (static build; `npm install && npm run build && npm run preview` to view it live)
-- Tickets: #1 parser, #2 booking-v3 hint, #3 one-day move
+- Tickets: #1 parser (fixed), #2 booking-v3 hint (won't fix: form retired), #3 one-day move (closed, counted under parser)
