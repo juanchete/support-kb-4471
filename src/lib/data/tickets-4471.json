@@ -1,5 +1,5 @@
 {
-  "parser": null,
-  "hint": null,
-  "shift": null
+  "parser": "https://github.com/juanchete/support-kb-4471/issues/1",
+  "hint": "https://github.com/juanchete/support-kb-4471/issues/2",
+  "shift": "https://github.com/juanchete/support-kb-4471/issues/3"
 }

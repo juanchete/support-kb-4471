@@ -34,3 +34,9 @@ Support desk. Decision records: whoever signed them.
 ---
 
 Exported 2026-10-04 from the `support` repo, `apps/kb/` → `src/`.
+
+## #4471 split (MEGA S01E03)
+
+- Page source: [`src/routes/kb/incidents/4471/problems/+page.svx`](src/routes/kb/incidents/4471/problems/+page.svx)
+- Page as the desk sees it: [`rendered/kb/incidents/4471/problems.html`](rendered/kb/incidents/4471/problems.html) (static build; `npm install && npm run build && npm run preview` to view it live)
+- Tickets: #1 parser, #2 booking-v3 hint, #3 one-day move

@@ -33,7 +33,7 @@
         <td>{g.channels.join(', ')}</td>
         <td>{g.firstSeen} → {g.lastSeen}</td>
         <td>
-          {#if link(g.problem)}<a href={link(g.problem)}>{link(g.problem)?.split('/').slice(-3).join('/').replace('/issues/', '#')}</a>{:else}none yet{/if}
+          {#if link(g.problem)}<a href={link(g.problem)}>#{link(g.problem)?.split('/').pop()}</a>{:else}none yet{/if}
         </td>
       </tr>
     {/each}

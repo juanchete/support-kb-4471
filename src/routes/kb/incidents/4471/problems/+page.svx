@@ -14,8 +14,7 @@ signature: Juan Andres Lopez
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 </script>
 
-[#4471](/kb/incidents/4471) is marked known: one issue, one fix queued. Its reports show
-<ProblemCount ticket={4471} /> problems. The queued parser fix closes only one of them.
+[#4471](/kb/incidents/4471) is marked known: one issue, one fix queued. Its reports show <ProblemCount ticket={4471} /> problems. The queued parser fix closes only one of them.
 
 <Callout kind="warn">
 Not one issue. Each problem below needs its own fix and its own ticket.
